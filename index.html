@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mirror Screen</title>
+  <meta name="description" content="PC 화면을 캡처해 좌우 반전하여 다른 모니터에 전체화면으로 출력합니다.">
+  <meta name="theme-color" content="#000000">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="stage">
+    <video id="video" autoplay muted playsinline></video>
+
+    <section id="panel" aria-label="컨트롤">
+      <div class="help" id="help">
+        <h1>Mirror Screen</h1>
+        <p>모니터1(주 화면)을 캡처해서 <b>이 창이 있는 모니터2</b>에 반전하여 출력합니다.</p>
+        <ol>
+          <li>Windows 디스플레이 설정을 <b>확장</b> 모드로 둡니다 (복제 ✕).</li>
+          <li>이 창을 모니터2(무선 HDMI로 나가는 화면)로 옮깁니다.</li>
+          <li><b>캡처 시작</b> → 공유 팝업에서 <b>모니터1 (전체 화면)</b>을 선택합니다.</li>
+          <li><b>모니터2 전체화면</b>을 누릅니다.</li>
+        </ol>
+        <p class="warn">⚠ 팝업에서 모니터2(이 창이 있는 화면)를 고르면 무한 거울 효과가 생깁니다.</p>
+      </div>
+
+      <div class="row">
+        <button id="btnStart" class="primary">캡처 시작</button>
+        <button id="btnStop" hidden>중지</button>
+        <button id="btnFsOther">모니터2 전체화면</button>
+        <button id="btnFsHere">현재 화면 전체화면</button>
+        <button id="btnInstall" hidden>앱 설치</button>
+      </div>
+
+      <div class="row opts">
+        <label><input type="checkbox" id="flipH"> 좌우 반전 <kbd>H</kbd></label>
+        <label><input type="checkbox" id="flipV"> 상하 반전 <kbd>V</kbd></label>
+        <label>화면 맞춤
+          <select id="fit">
+            <option value="contain">비율 유지 (여백)</option>
+            <option value="cover">꽉 채움 (잘림)</option>
+            <option value="fill">늘려 채움</option>
+          </select>
+        </label>
+        <label><input type="checkbox" id="fps60"> 60fps 요청</label>
+      </div>
+
+      <p id="status" role="status">대기 중</p>
+      <p class="keys">단축키: <kbd>C</kbd> 캡처 · <kbd>X</kbd> 중지 · <kbd>H</kbd>/<kbd>V</kbd> 반전 · <kbd>F</kbd> 전체화면 · <kbd>M</kbd> 모니터2 전체화면 · <kbd>O</kbd> 맞춤 변경 · <kbd>T</kbd> 패널 표시 · 더블클릭 전체화면</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
